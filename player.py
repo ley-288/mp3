@@ -1,10 +1,14 @@
 from tkinter import *
 from tkinter import filedialog
+import pygame
 
 root = Tk()
 
 root.title("MP3 Player")
 root.geometry("500x400")
+
+#initialize pygame
+pygame.mixer.init()
 
 #function to add one song
 def add_song():
@@ -31,11 +35,17 @@ def add_many_songs():
 
 #Create delete single song function
 def delete_song():
-    pass
+    playlist_box.delete(ANCHOR) #anchor = highlighted song in mp3 text box
 
 #Create all songs function
 def delete_all_songs():
-    pass
+    playlist_box.delete(0, END)
+
+
+#Create play function
+def play():
+    song = playlist_box.get(ACTIVE)
+    my_label.config(text=song)
 
 
 #Create playlist box
@@ -45,7 +55,7 @@ playlist_box.pack(pady=20)
 #Define button images
 back_btn_img = PhotoImage(file='images/back50.png')
 forward_btn_img = PhotoImage(file='images/forward50.png')
-play_btn_img = PhotoImage(file='images/play50.png')
+play_btn_img = PhotoImage(file='images/play50.png', command=play)
 pause_btn_img = PhotoImage(file='images/pause50.png')
 stop_btn_img = PhotoImage(file='images/stop50.png')
 
